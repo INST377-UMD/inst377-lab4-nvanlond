@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>INST377 - Lab 4 Niels van Londen</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body id="bodystyle">
+        <h1 id="addText">INST377 - Lab 4</h1>
+        <div class="main-container">
+            
+            <!-- Alert Me! -->
+            <div class="section">
+                <form name = "alertMeSection" onsubmit="alertMe()">
+                    <label for="alert_name">Name:</label>
+                    <input type="text" placeholder="John" id="alert_name" required>
+                    <input type="submit" value="Alert Me!">
+                </form>
+            </div>
+
+            <!-- Change Color -->
+            <div class="section">
+                <button onclick="changeColor()">Change Color</button>
+            </div>
+
+            <!-- Validate Text -->
+            <div class="section">
+                <form name = "contactForm" onsubmit="formValidation()">
+                    <label for="name">Text Tester:</label>
+                    <input type="text" placeholder="John" id="name" required>
+                    <input type="submit" value="Validate Text!">
+                </form>
+            </div>
+
+            <!-- Add Text -->
+            <div class="section">
+                <button onclick="addText()">Add Text</button>
+            </div>
+        </div>
+
+        <!-- Javascript Code -->
+        <script type="text/javascript">
+            document.body.style.backgroundColor = 'lightpink';
+
+            function alertMe() {
+                console.log('Hi ' + document.alertMeSection.alert_name.value + '!')
+                alert('Hi ' + document.alertMeSection.alert_name.value + '!')
+
+            }
+
+            // Change color of background
+            function changeColor() {
+                console.log('Attempting to change color of text, current color is: ', 
+                document.getElementById("bodystyle").style.backgroundColor)
+                
+                if(document.getElementById("bodystyle").style.backgroundColor == 'lightpink') {
+                    document.getElementById("bodystyle").style.backgroundColor = 'lightblue';
+                } else {
+                    document.getElementById("bodystyle").style.backgroundColor = 'lightpink'
+                }
+                console.log("Successfully changed color of text, new color is: ", 
+                document.getElementById("bodystyle").style.backgroundColor)
+            }
+
+            function formValidation() {
+                console.log('Validating user input:', document.contactForm.name.value)
+                const validationRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                
+                if (document.contactForm.name.value.trim() == "") {  // remove any whitespace and check if empty
+                    alert('enter a valid name!')
+                    return false;
+                } else if (validationRegex.test(document.contactForm.name.value)) {
+                    alert('You cannot use special characters')
+                    return false
+                } else {
+                    alert('Good to go!')
+                }
+            }
+            
+            // Add text to header
+            function addText() {
+                if (document.getElementById("addText").textContent === "INST377 - Lab 4") {
+                    console.log('Attempting to add text')
+                    document.getElementById("addText").append(" - Adding Text")
+                } else {
+                    console.log('Text already added')
+                }
+            }
+        </script>
+    </body>
+</html>
